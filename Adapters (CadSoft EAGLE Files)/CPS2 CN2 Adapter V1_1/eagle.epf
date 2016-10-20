@@ -1,0 +1,21 @@
+[Eagle]
+Version="07 06 00"
+Platform="Windows"
+Serial="62191E841E-LSR-WLM-1EL"
+Globals="Globals"
+Desktop="Desktop"
+
+[Globals]
+AutoSaveProject=1
+UsedLibrary="C:/EAGLE-7.6.0/lbr/wirepad.lbr"
+UsedLibrary="C:/EAGLE-7.6.0/lbr/pinhead.lbr"
+
+[Win_1]
+Type="Control Panel"
+Loc="0 0 1679 997"
+State=1
+Number=0
+
+[Desktop]
+Screen="1680 1050"
+Window="Win_1"
