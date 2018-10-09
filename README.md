@@ -3,6 +3,7 @@ Run CPS2 'B' boards with original roms without a battery
 Forked from: https://github.com/ArcadeHacker/ArcadeHacker_CPS2
 
 *** CURRENTLY UNTESTED ON ACTUAL CPS2 HARDWARE ***
+* If this does currently work, it will probably add about a 9 sec delay to the game booting each time *
 
 The purpose of this is to install a Arduino in each CPS B board so that it will write the decryption key every time you boot the game. This will allow you to keep the original unaltered roms, but be able to remove the battery and not have to worry about it leaking and causing damage to the PCB.
 
@@ -19,3 +20,5 @@ CLOCK   - Arduino # 11
 SETUP2  - Arduino # 12
 
 GND     - Arduino GND
+
+NOTE: You will need to edit the .ino file to change the value of "const unsigned char Key[] PROGMEM = ..." to the decryption key of the game you will be installing this in.
