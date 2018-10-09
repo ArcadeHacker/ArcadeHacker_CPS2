@@ -9,8 +9,13 @@ The purpose of this is to install a Arduino in each CPS B board so that it will 
 This is intended to be used on a Arduino Nano due to the small form factor, but should work on other Arduino versions as well. You will need to be connected (soldered) to the CPS2 B board as specified in the original ArcadeHacker_CPS2 programming guide, but without the need of a LCD Shield:
 
 +5V     - Arudino 5V
+
 DATA    - Arduino # 2
+
 SETUP1  - Arduino # 3
+
 CLOCK   - Arduino # 11
+
 SETUP2  - Arduino # 12
+
 GND     - Arduino GND
