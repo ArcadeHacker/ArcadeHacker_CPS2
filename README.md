@@ -1,9 +1,10 @@
 # No-Battery-CPS2
 Run CPS2 'B' boards with original roms without a battery
+
 Forked from: https://github.com/ArcadeHacker/ArcadeHacker_CPS2
 
-*** CURRENTLY UNTESTED ON ACTUAL CPS2 HARDWARE ***
-* If this does currently work, it will probably add about a 9 sec delay to the game booting each time *
+*** TESTED BY ME AND WORKING ON: ***
+* 93646B-6 model B board (X-Men: Children of the Atom, xmcotau)
 
 The purpose of this is to install a Arduino in each CPS B board so that it will write the decryption key every time you boot the game. This will allow you to keep the original unaltered roms, but be able to remove the battery and not have to worry about it leaking and causing damage to the PCB.
 

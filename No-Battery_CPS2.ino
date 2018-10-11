@@ -19,7 +19,9 @@
 const unsigned char Key[] PROGMEM =    { 0x0F,0x00,0x02,0x40,0x00,0x08,0x04,0xC1,0x3A,0x62,0x03,0x03,0x4B,0xDA,0x00,0x66,0xCD,0xFA,0x95,0x30}; //xmcotau
 
 // delay amount
-int time = 25;
+//int time = 25; //original delay, but takes around 9 sec to boot
+// unsure if the shorter delay may cause compatibility issues on some board revisions
+int time = 1;
 
 char buffer[20];  
 
