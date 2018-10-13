@@ -5,6 +5,8 @@ Forked from: https://github.com/ArcadeHacker/ArcadeHacker_CPS2
 
 *** TESTED BY ME AND WORKING ON: ***
 * 93646B-6 model B board (X-Men: Children of the Atom, xmcotau)
+* 93646B-6 model B board (Marvel Super Heroes, mshu)
+* 93646B-3 model B board (Alien vs Predator, avspu)
 
 The purpose of this is to install a Arduino in each CPS B board so that it will write the decryption key every time you boot the game. This will allow you to keep the original unaltered roms, but be able to remove the battery and not have to worry about it leaking and causing damage to the PCB.
 
