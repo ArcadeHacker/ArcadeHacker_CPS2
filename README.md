@@ -8,6 +8,10 @@ Forked from: https://github.com/ArcadeHacker/ArcadeHacker_CPS2
 * 93646B-6 model B board (Marvel Super Heroes, mshu)
 * 93646B-3 model B board (Alien vs Predator, avspu)
 
+*** Current Issues reported by Artemio: ***
+* Not working on B board revision 93646B-4
+* B board revision 97691A-3 is very picky about 5v power (lower/higher slight voltage changes such as 4.85v/5.15v might make the Arduino unstable
+
 The purpose of this is to install a Arduino in each CPS B board so that it will write the decryption key every time you boot the game. This will allow you to keep the original unaltered roms, but be able to remove the battery and not have to worry about it leaking and causing damage to the PCB.
 
 This is intended to be used on a Arduino Nano due to the small form factor, but should work on other Arduino versions as well. You will need to be connected (soldered) to the CPS2 B board as specified in the original ArcadeHacker_CPS2 programming guide, but without the need of a LCD Shield:
