@@ -1,6 +1,9 @@
 // Forked from:
 // CPS2 Desuicider 1.06 by arcadehacker.blogspot.com, https://github.com/ArcadeHacker/ArcadeHacker_CPS2
 
+// Power goes to VIN (+5 line skips regulator), CN9 pin 1
+// GND goes to GND, CN pin 6
+
 
 //  CPS2 Board CN9 interface pins
 #define DATA        2   //CN9 #2 
@@ -10,13 +13,13 @@
 
 //  CPS2 Board without CN9, CN2 interface pins
 //  ------------------------------------------
-//  DATA    ->  CN2 A32
-//  SETUP1  ->  CN2 A30
-//  CLOCK   ->  CN2 A31
-//  SETUP2  ->  CN2 A29
+//  (Arduino 2)  DATA    ->  CN2 A32
+//  (Arduino 11) CLOCK   ->  CN2 A31
+//  (Arduino 3)  SETUP1  ->  CN2 A30
+//  (Arduino 12) SETUP2  ->  CN2 A29
 
 //Replace "0x0F,0x00,0x02,0x40,0x00,0x08,0x04,0xC1,0x3A,0x62,0x03,0x03,0x4B,0xDA,0x00,0x66,0xCD,0xFA,0x95,0x30" with the decryption key for your game
-const unsigned char Key[] PROGMEM =    { 0x0F,0x00,0x02,0x40,0x00,0x08,0x04,0xC1,0x3A,0x62,0x03,0x03,0x4B,0xDA,0x00,0x66,0xCD,0xFA,0x95,0x30}; //xmcotau
+const unsigned char Key[] PROGMEM =    { 0x0F,0x00,0x02,0x40,0x00,0x08,0x70,0x43,0x80,0x00,0x00,0x10,0xE4,0x63,0x15,0xFE,0xEE,0xE5,0xB1,0x68}; //hsf2
 
 // delay amount
 //int time = 25; //original delay, but takes around 9 sec to boot
@@ -30,13 +33,24 @@ unsigned char bits[8];
 
 void PrepareOutput()
 {
-  pinMode(SETUP1, OUTPUT); pinMode(SETUP2, OUTPUT);
-  pinMode(CLOCK, OUTPUT); pinMode(DATA, OUTPUT); 
+  pinMode(SETUP1, OUTPUT);
+  pinMode(SETUP2, OUTPUT);
+  pinMode(CLOCK, OUTPUT);
+  pinMode(DATA, OUTPUT); 
 
-  digitalWrite(SETUP1, LOW);
   digitalWrite(CLOCK, LOW);
   digitalWrite(DATA, LOW);
+  digitalWrite(SETUP1, LOW);
   digitalWrite(SETUP2, HIGH);
+}
+
+void ReleasePins()
+{
+  // move them to high-impedance state
+  pinMode(SETUP1, INPUT);
+  pinMode(SETUP2, INPUT);
+  pinMode(CLOCK, INPUT);
+  pinMode(DATA, INPUT); 
 }
 
 void CLK()
@@ -86,13 +100,19 @@ void ProgramCPS2()
   digitalWrite(SETUP2, HIGH); 
   delay(time);
   digitalWrite(CLOCK, LOW);
+  digitalWrite(DATA, LOW);  // reset to default
 }
 
 void setup() 
 {
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
+  
   PrepareOutput();
   ProgramCPS2();
-  PrepareOutput();
+  ReleasePins();
+  
+  digitalWrite(LED_BUILTIN, LOW);
 }
 
 void loop()   /*----( LOOP: RUNS CONSTANTLY )----*/
