@@ -1,7 +1,8 @@
 // Forked from:
 // CPS2 Desuicider 1.06 by arcadehacker.blogspot.com, https://github.com/ArcadeHacker/ArcadeHacker_CPS2
 
-// Power goes to VIN (+5 line skips regulator), CN9 pin 1
+// Power is recommended to go to +5v pin on the Arduino, CN9 pin 1
+//  VIN goes to the voltage regulator which will (probably) cause a voltage drop when feeding it 5V
 // GND goes to GND, CN pin 6
 
 
