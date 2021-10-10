@@ -71,6 +71,9 @@ void PrintIntro()
 {
     IO.println("            CPS2 Desuicide               ");
     IO.println("        By ArcadeHacker and davvid       ");
+
+    PrintAllGames();
+
     IO.println("");
     IO.println("Tap the button briefly to go to the next game.");
     IO.println("Tap 2 or more times quickly to jump forward by 10 games on each tap.");
@@ -86,6 +89,32 @@ void PrintIntro()
     IO.println("");
 
     PrintCurrentGame();
+}
+
+void PrintAllGames()
+{
+    char buf[20] = {0};
+
+    for (int idx = 0; idx < data.num_games; ++idx) {
+        // Copy program memory to a local buffer.
+        strcpy_P(buf, (char*)pgm_read_word(&(GameList[idx])));
+
+        if (idx % 6 == 0) {
+            IO.println("");
+        }
+        if (idx < 10) {
+            IO.print("0");
+        }
+        if (idx < 100) {
+            IO.print("0");
+        }
+        IO.print(idx);
+        IO.print(" ");
+        IO.write(buf, sizeof(buf));
+        IO.print(" ");
+    }
+
+    IO.println("");
 }
 
 void PrintCurrentGame()
