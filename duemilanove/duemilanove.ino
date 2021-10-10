@@ -17,6 +17,7 @@
 
 // Short presses are button presses that held for less than SHORT_PRESS_TIME.
 #define BUTTON_SHORT_PRESS_TIME 3000  // milliseconds
+#define BUTTON_TAP_TIME 400  // milliseconds
 
 // Arduino Duemilanove uses SerialUSB. Changes this to Serial for others.
 #define IO Serial
@@ -31,6 +32,7 @@ struct board_t {
 struct data_t {
     bool button_pressed;
     int button_pressed_time;
+    int button_release_time;
     int num_games;
     int current_game_idx;
 };
@@ -38,6 +40,7 @@ struct data_t {
 struct data_t data = {
     false,  // button_pressed
     0,      // button_pressed_time
+    0,      // button_release_time
     0,      // number of games
     0,      // current_game_idx
 };
@@ -70,6 +73,8 @@ void PrintIntro()
     IO.println("        By ArcadeHacker and davvid       ");
     IO.println("");
     IO.println("Tap the button briefly to go to the next game.");
+    IO.println("Tap 2 or more times quickly to jump forward by 10 games on each tap.");
+    IO.println("");
     IO.println("Press and hold the button for 3 seconds to select and start.");
     IO.println("");
     IO.println("The LED blinks slowly when initially pressed.");
@@ -151,6 +156,7 @@ void loop()
     bool pressed = board.button.isPressed();
     bool released = board.button.isReleased();
     int current_time = millis();
+    int increment = 1;
 
     if (pressed) {
         // The button was just pressed.
@@ -168,7 +174,19 @@ void loop()
         // If the button press was short then we skip forward to the next game.
         int elapsed_time = current_time - data.button_pressed_time;
         if (elapsed_time <= BUTTON_SHORT_PRESS_TIME) {
-            int next_idx = (data.current_game_idx + 1) % data.num_games;
+
+            // How long has it been since the last releae?
+            int time_since_last_release = current_time - data.button_release_time;
+            // Store the new release time after calculating time_since_last_release.
+            data.button_release_time = current_time;
+
+            // Quick taps increment by 10.
+            if (time_since_last_release <= BUTTON_TAP_TIME) {
+                increment = 10;
+            } else {
+                increment = 1;
+            }
+            int next_idx = (data.current_game_idx + increment) % data.num_games;
             data.current_game_idx = next_idx;
 
         } else {
